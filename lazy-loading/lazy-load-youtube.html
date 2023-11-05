@@ -1,0 +1,62 @@
+<html>
+
+<head>
+</head>
+
+<body>
+  <div class="youtube" data-embed="MChVM4FAVng" style="width:790px;height:450px;">
+  </div>
+  <script>
+    (function () {
+      const isCloseToport = function (elem) {
+        const heightReference = (window.innerHeight || document.documentElement.clientHeight);
+        const bounding = elem.getBoundingClientRect();
+        return (
+          bounding.top >= 0 &&
+          bounding.left >= 0 &&
+          bounding.bottom <= heightReference &&
+          bounding.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+      };
+
+      var youtubes = Array.from(document.querySelectorAll(".youtube"));
+      youtubes.forEach((youtube) => {
+        youtube.style.position = "relative";
+        youtube.style.cursor = "pointer";
+
+        // Thumbnail image
+        var image = new Image();
+        image.src = "https://img.youtube.com/vi/" + youtube.dataset.embed + "/sddefault.jpg";
+        image.loading = "lazy";
+        image.style.objectFit = "cover";
+        image.style.width = "100%";
+        image.style.height = "100%";
+        youtube.appendChild(image);
+
+        // Play button
+        var playDiv = document.createElement("div");
+        playDiv.style.position = "absolute";
+        playDiv.style.width = "90px";
+        playDiv.style.height = "60px";
+        playDiv.style.top = "50%";
+        playDiv.style.left = "50%";
+        playDiv.style.transform = "translate3d( -50%, -50%, 0 )";
+        playDiv.innerHTML += '<svg height="100%" version="1.1" viewBox="0 0 68 48" width="100%"><path class="ytp-large-play-button-bg" d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#f00"></path><path d="M 45,24 27,14 27,34" fill="#fff"></path></svg>';
+        youtube.appendChild(playDiv);
+
+        youtube.addEventListener("click", function () {
+          var iframe = document.createElement("iframe");
+          iframe.setAttribute("style", "height: 100%; width: 100%;");
+          iframe.setAttribute("frameborder", "0");
+          iframe.setAttribute("allowfullscreen", "");
+          iframe.setAttribute("src", "https://www.youtube.com/embed/" + youtube.dataset.embed + "?rel=0&showinfo=0&autoplay=1");
+          youtube.innerHTML = "";
+          youtube.appendChild(iframe);
+          console.log("Appended iframe");
+        });
+      });
+    })();
+  </script>
+</body>
+
+</html>
