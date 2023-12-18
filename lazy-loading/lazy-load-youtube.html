@@ -28,7 +28,7 @@
         var image = new Image();
         image.src = "https://img.youtube.com/vi/" + youtube.dataset.embed + "/sddefault.jpg";
         image.loading = "lazy";
-        image.style.objectFit = "cover";
+        image.style["object-fit"] = "cover";
         image.style.width = "100%";
         image.style.height = "100%";
         youtube.appendChild(image);
